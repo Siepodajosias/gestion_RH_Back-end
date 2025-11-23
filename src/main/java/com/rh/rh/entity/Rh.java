@@ -2,13 +2,17 @@ package com.rh.rh.entity;
 
 import com.rh.rh.entity.enums.ERole;
 import com.rh.rh.entity.enums.StatutUtilisateur;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import jakarta.persistence.*;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collections;
+import java.util.List;
 
 import static com.rh.rh.entity.JpaConstants.ID;
 import static com.rh.rh.entity.JpaConstants.SEQ;
-import static java.util.Collections.singleton;
 
 @Entity
 @Table(name = Rh.TABLE_NAME)
@@ -19,8 +23,7 @@ public class Rh {
     public static final String TABLE_SEQ = TABLE_ID + SEQ;
 
     @Id
-    @SequenceGenerator(name = TABLE_SEQ, sequenceName = TABLE_SEQ)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = TABLE_SEQ)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nom")
@@ -29,14 +32,14 @@ public class Rh {
     @Column(name = "prenoms")
     private String prenoms;
 
-    @Column(name = "nomUtilisateur")
-    private String nomUtilisateur;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "motDePasse")
-    private String motDePasse;
+    @Column(name = "password")
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private StatutUtilisateur statut;
@@ -44,26 +47,36 @@ public class Rh {
     @Enumerated(EnumType.STRING)
     private ERole role;
 
-    public User buildUser() {
-        return new User(nomUtilisateur, motDePasse, singleton(new SimpleGrantedAuthority(role.name())));
+
+    public UserDetails buildUser() {
+        // Crée une seule autorité GrantedAuthority à partir de l'énumération ERole
+        List<GrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority(this.role.name())
+        );
+
+        // Construit et retourne l'objet UserDetails (l'implémentation par défaut de Spring Security)
+        return new User(
+                this.username, // Nom d'utilisateur
+                this.password, // Mot de passe (déjà haché)
+                authorities    // La liste des rôles/autorités
+        );
     }
 
     public Rh() {}
 
-    public Rh(String motDePasse, StatutUtilisateur statut, ERole role) {
-        this.motDePasse= motDePasse;
+    public Rh(String password, StatutUtilisateur statut, ERole role) {
+        this.password= password;
         this.statut    = statut;
         this.role      = role;
     }
 
-    public Rh(Long id, String nom, String prenoms, String nomUtilisateur, String email, StatutUtilisateur statut, String motDePasse, ERole role) {
-        this.id            = id;
+    public Rh(String nom, String prenoms, String username, String email, StatutUtilisateur statut, String password, ERole role) {
         this.nom           = nom;
         this.prenoms       = prenoms;
-        this.nomUtilisateur= nomUtilisateur;
+        this.username      = username;
         this.email         = email;
         this.statut        = statut;
-        this.motDePasse    = motDePasse;
+        this.password      = password;
         this.role          = role;
     }
 
@@ -81,8 +94,8 @@ public class Rh {
         return prenoms;
     }
 
-    public String getNomUtilisateur() {
-        return nomUtilisateur;
+    public String getUsername() {
+        return username;
     }
 
     public String getEmail() {
@@ -93,8 +106,8 @@ public class Rh {
         return statut;
     }
 
-    public String getMotDePasse() {
-        return motDePasse;
+    public String getPassword() {
+        return password;
     }
 
     public ERole getRole() {
@@ -115,8 +128,8 @@ public class Rh {
         this.prenoms = prenoms;
     }
 
-    public void setNomUtilisateur(String nomUtilisateur) {
-        this.nomUtilisateur = nomUtilisateur;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setEmail(String email) {
@@ -127,16 +140,21 @@ public class Rh {
         this.statut = statut;
     }
 
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
+    public void setRole(ERole role) {
+        this.role = role;
     }
 
-    public void creerOuMettreAJourRh(String nomUtilisateur, String motDePasse, String nom, String prenoms, ERole role, StatutUtilisateur statut) {
-        this.nomUtilisateur = nomUtilisateur;
-        this.motDePasse = motDePasse;
-        this.nom = nom;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void creerOuMettreAJourRh(String username, String password, String nom, String prenoms, ERole role, StatutUtilisateur statut, String email) {
+        this.username= username;
+        this.password= password;
+        this.nom     = nom;
         this.prenoms = prenoms;
-        this.role = role;
-        this.statut = statut;
+        this.role    = role;
+        this.statut  = statut;
+        this.email   = email;
     }
 }

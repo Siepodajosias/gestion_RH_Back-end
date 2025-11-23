@@ -24,7 +24,7 @@ public class Department {
     private String designation;
 
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "department")
     private List<Employee> employee;
 
     public Long getId() {

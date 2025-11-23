@@ -14,8 +14,8 @@ import static java.util.stream.Collectors.toList;
 public class DepartmentFacade {
     private final DepartmentRepository departmentRepository;
 
-    public DepartmentFacade(DepartmentRepository departmentRepository) {
-        departmentRepository = departmentRepository;
+    public DepartmentFacade (DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
     }
 
     public List<DepartmentDto> recupererListeDepartment(){
@@ -32,7 +32,7 @@ public class DepartmentFacade {
         departmentRepository.save(department);
     }
 
-    public void supprimerDepartment(Long id)throws Exception {
+    public void supprimerDepartment(Long id) throws Exception {
         Optional<Department> departmentOptional = departmentRepository.findById(id);
         if (departmentOptional.isPresent()) {
             departmentRepository.deleteById(id);

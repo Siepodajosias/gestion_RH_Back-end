@@ -27,39 +27,14 @@ public class RhControllor {
         return rhFacade.recupererListeRh();
     }
 
-    public recupererRHParId(){}
-
     /**
-     * Crée ou modifie un utilisateur.
+     * Crée ou modifie un employée.
      *
-     * @param utilisateurDto l'utilisateur.
+     * @param rhDto l'employée.
      */
-    @PostMapping("/creer")
-    public void creerRH(){}
-
-    /**
-     * Désactive un utilisateur.
-     *
-     * @param utilisateurDto l'utilisateur.
-     */
-    @PostMapping("/activer-ou-desactiver")
-    public mettreAJourRH(){}
-
-    /**
-     * Supprime un utilisateur.
-     *
-     * @param id l'identifiant de l'utilisateur.
-     */
-    @DeleteMapping("/supprimer/{id}")
-    public supprimerRH(){}
-
-    /**
-     * Modifie le mot de passe d'un utilisateur.
-     *
-     * @param utilisateurDto l'utilisateur.
-     */
-    @PostMapping("/modifier-mot-de-passe")
-    public void modifierMotDePasseUtilisateur(@RequestBody UtilisateurDto utilisateurDto) {
-        utilisateurFacade.modifierMotDePasse(utilisateurDto);
+    @PostMapping("/enregistrer")
+    public void creerOuModifierUtilisateur(@RequestBody RhDto rhDto) {
+        rhFacade.creerOuModifierRh(rhDto);
     }
+
 }

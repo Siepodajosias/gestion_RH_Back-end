@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface RhRepository extends JpaRepository<Rh, Long> {
-    Optional<Rh> findByUsername(String username);
+    Optional<Rh> findByUsername(String nomUtilisateur);
     Optional<List<Rh>> findByRole(String code);
 }

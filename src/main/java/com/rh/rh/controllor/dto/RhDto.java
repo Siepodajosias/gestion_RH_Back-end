@@ -14,6 +14,7 @@ public class RhDto {
 
     private String nomUtilisateur;
 
+    private String email;
     private String motDePasse;
 
     private StatutUtilisateur statut;
@@ -31,29 +32,25 @@ public class RhDto {
      * @param rh l'utilisateur
      */
     public RhDto(Rh rh) {
-        this.id            = rh.getId();
         this.nom           = rh.getNom();
         this.prenoms       = rh.getPrenoms();
-        this.nomUtilisateur= rh.getNomUtilisateur();
+        this.nomUtilisateur= rh.getUsername();
         this.statut        = rh.getStatut();
-        this.motDePasse    = rh.getMotDePasse();
+        this.motDePasse    = rh.getPassword();
         this.role          = rh.getRole();
+        this.email         = rh.getEmail();
     }
 
-    public RhDto(Long id,String nom, String prenoms, String nomUtilisateur, String motDePasse, ERole role) {
-        this.id = id;
-        this.nom = nom;
-        this.prenoms = prenoms;
-        this.nomUtilisateur = nomUtilisateur;
-        this.motDePasse = motDePasse;
-        this.role = role;
+    public RhDto(String nom, String prenoms, String nomUtilisateur, String email, String motDePasse, ERole role) {
+        this.nom           = nom;
+        this.prenoms       = prenoms;
+        this.nomUtilisateur= nomUtilisateur;
+        this.motDePasse    = motDePasse;
+        this.role          = role;
+        this.email         = email;
     }
 
     // Création des getters
-
-    public Long getId() {
-        return id;
-    }
 
     public String getNom() {
         return nom;
@@ -79,12 +76,15 @@ public class RhDto {
         return role;
     }
 
-
-   // Création des setters
-
-    public void setId(Long id) {
-        this.id = id;
+    public String getEmail() {
+        return email;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    // Création des setters
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -108,5 +108,13 @@ public class RhDto {
 
     public void setRole(ERole role) {
         this.role = role;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
