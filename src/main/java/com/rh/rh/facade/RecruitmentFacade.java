@@ -22,7 +22,6 @@ public class RecruitmentFacade {
         return  recruitmentRepository.findAll()
                 .stream()
                 .map(RecruitmentDto::new)
-                .sorted()
                 .collect(toList());
     }
 

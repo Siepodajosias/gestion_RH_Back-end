@@ -1,5 +1,5 @@
 # ---- STAGE 1 : Build avec Gradle ----
-FROM gradle:8.10-jdk21 AS builder
+FROM gradle:8.10-jdk17 AS builder
 WORKDIR /app
 
 # Copie uniquement les fichiers de configuration pour optimiser le cache
@@ -16,7 +16,7 @@ COPY src ./src
 RUN gradle bootJar -x test --no-daemon
 
 # ---- STAGE 2 : Image finale JRE ----
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Création d'un utilisateur non-root pour la sécurité

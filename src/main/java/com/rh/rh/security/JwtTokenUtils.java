@@ -18,9 +18,9 @@ import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 import static java.lang.System.currentTimeMillis;
 
 
-import io.jsonwebtoken.security.Keys; // <-- Nouvel Import
-import javax.crypto.SecretKey; // <-- Nouvel Import
-import java.nio.charset.StandardCharsets; // <-- Nouvel Import
+import io.jsonwebtoken.security.Keys;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class JwtTokenUtils implements Serializable {

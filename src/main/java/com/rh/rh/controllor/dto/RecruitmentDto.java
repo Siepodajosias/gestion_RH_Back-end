@@ -24,6 +24,13 @@ public class RecruitmentDto {
         this.numero = recruitment.getNumero();
     }
 
+    public RecruitmentDto(String nom, String prenoms, String email, String numero) {
+        this.nom    = nom;
+        this.prenoms= prenoms;
+        this.email  = email;
+        this.numero = Integer.valueOf(numero);
+    }
+
     public Long getId() {
         return id;
     }
