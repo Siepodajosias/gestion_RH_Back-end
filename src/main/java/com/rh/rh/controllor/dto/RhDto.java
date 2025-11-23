@@ -32,6 +32,7 @@ public class RhDto {
      * @param rh l'utilisateur
      */
     public RhDto(Rh rh) {
+        this.id            = rh.getId();
         this.nom           = rh.getNom();
         this.prenoms       = rh.getPrenoms();
         this.nomUtilisateur= rh.getUsername();

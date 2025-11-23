@@ -19,6 +19,10 @@ public class DepartmentDto {
         this.employee   = department.getEmployee();
     }
 
+    public DepartmentDto(String designation) {
+        this.designation= designation;
+    }
+
     public Long getId() {
         return id;
     }

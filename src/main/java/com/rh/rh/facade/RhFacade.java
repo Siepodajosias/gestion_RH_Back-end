@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.rh.rh.services.SecurityService.crypterPassword;
-import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -32,8 +31,6 @@ public class RhFacade {
         return rhRepository.findAll()
                 .stream()
                 .map(RhDto::new)
-                .sorted(comparing(RhDto::getNom)
-                        .thenComparing(RhDto::getPrenoms))
                 .collect(toList());
     }
 

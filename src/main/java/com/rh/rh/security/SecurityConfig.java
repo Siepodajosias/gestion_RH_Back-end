@@ -27,6 +27,7 @@ public class SecurityConfig {
 
          httpSecurity
                  .csrf(csrf -> csrf.disable())
+                 .cors(cors -> cors.configure(httpSecurity))
                  .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                  .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                  .authorizeHttpRequests(auth -> auth
