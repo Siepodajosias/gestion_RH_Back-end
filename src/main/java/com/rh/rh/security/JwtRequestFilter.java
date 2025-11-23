@@ -74,6 +74,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 				// Après avoir renseigné les informations de l'utilisateur, on spécifie que celui-ci est authentifié.
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+				logger.info("Utilisateur {} authentifié avec autorités: {}", username, (Object) userDetails.getAuthorities().toString());
 			}
 
 		}
