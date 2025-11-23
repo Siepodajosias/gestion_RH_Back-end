@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Comparator;
 
 import static java.util.stream.Collectors.toList;
 
@@ -22,7 +23,8 @@ public class DepartmentFacade {
         return  departmentRepository.findAll()
                 .stream()
                 .map(DepartmentDto::new)
-                .sorted()
+                .sorted(Comparator.comparing(DepartmentDto::getDesignation,
+                        Comparator.nullsLast(Comparator.naturalOrder())))
                 .collect(toList());
     }
 
